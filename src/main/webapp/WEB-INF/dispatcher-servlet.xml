@@ -13,8 +13,7 @@
     <!-- =================== -->
     <!--     映射处理器      -->
     <!-- =================== -->
-    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
     <!-- =================== -->
     <!--     处理器适配器    -->
     <!-- =================== -->
@@ -46,5 +45,5 @@
         </property>
     </bean>
 
-    <bean class="com.company.project.support.Uris"/>
+    <bean class="com.company.project.support.SpringContext"/>
 </beans>

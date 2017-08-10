@@ -1,8 +1,8 @@
 package com.company.project.auth.filter;
 
+import com.company.project.support.Uris;
 import com.company.project.support.context.Request;
 import com.company.project.support.context.TrackKey;
-import com.company.project.support.Uris;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import org.apache.shiro.web.servlet.OncePerRequestFilter;
@@ -53,11 +53,11 @@ public class WatchDog extends OncePerRequestFilter {
             MDC.put(REQUEST_ID, requestId);
             TrackKey.set(requestId);
             //Uri
-//            if (!Uris.isLegal(uri)) {
-//                response.sendError(404);
-//                LOGGER.warn("URI[{}]非法！", uri);
-//                return;
-//            }
+            if (!Uris.isLegal(uri)) {
+                response.sendError(404);
+                LOGGER.warn("URI[{}]非法！", uri);
+                return;
+            }
             //执行下个Filter
             filterChain.doFilter(request, response);
         } finally {

@@ -8,10 +8,9 @@
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 >
 
-    <context:component-scan base-package="com.company.project">
-    </context:component-scan>
+    <!--<context:component-scan base-package="com.company.project">-->
+    <!--</context:component-scan>-->
 
-    <bean class="com.company.project.support.SpringContext"/>
 
     <dubbo:application name="demo-api"/>
 
