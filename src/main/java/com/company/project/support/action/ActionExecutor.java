@@ -14,11 +14,11 @@ import java.util.Map;
 public class ActionExecutor {
 
     /**
-     * 执行Action
+     * 执行
      *
      * @param request
      * @param response
-     * @param clazz  执行类
+     * @param clazz    执行类
      * @return Map<String, Object>
      */
     public static Map<String, Object> execute(HttpServletRequest request, HttpServletResponse response,
