@@ -1,7 +1,6 @@
 package com.company.project.support;
 
 import org.springframework.core.annotation.AliasFor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
