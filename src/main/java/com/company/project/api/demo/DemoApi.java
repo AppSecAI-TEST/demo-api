@@ -25,6 +25,6 @@ public class DemoApi {
     @RequestMapping("/say_bye")
     @ResponseBody
     public Map<String, Object> say_bye(HttpServletRequest request, HttpServletResponse response) {
-        return ActionExecutor.execute(request, response, Action_say_hi.class);
+        return ActionExecutor.execute(request, response, Action_say_bye.class);
     }
 }
