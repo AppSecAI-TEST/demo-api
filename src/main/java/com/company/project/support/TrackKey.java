@@ -1,4 +1,4 @@
-package com.company.project.auth.support;
+package com.company.project.support;
 
 /**
  * Track Key Holder

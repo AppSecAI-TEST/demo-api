@@ -1,8 +1,8 @@
 package com.company.project.auth.filter;
 
-import com.company.project.auth.support.Request;
-import com.company.project.auth.support.TrackKey;
-import com.company.project.auth.support.Uris;
+import com.company.project.support.Request;
+import com.company.project.support.TrackKey;
+import com.company.project.support.Uris;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import org.apache.shiro.web.servlet.OncePerRequestFilter;

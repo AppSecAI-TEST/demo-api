@@ -1,4 +1,4 @@
-package com.company.project.auth.support;
+package com.company.project.support;
 
 import com.google.common.collect.Sets;
 import org.slf4j.Logger;
