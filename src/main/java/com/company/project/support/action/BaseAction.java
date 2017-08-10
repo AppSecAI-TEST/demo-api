@@ -1,8 +1,8 @@
 package com.company.project.support.action;
 
-import com.company.project.webapi.web.support.Results;
-import com.company.project.webapi.web.support.context.RequestContext;
-import com.company.util.JsonUtil;
+import com.company.project.support.Results;
+import com.company.project.support.context.RequestContext;
+import com.company.project.support.session.SessionUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,31 +20,23 @@ public abstract class BaseAction implements Action {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    //参数
-    private Map<String, Object> params;
-
     @Override
     public final Map<String, Object> doExecute(HttpServletRequest request, HttpServletResponse response) {
-        //设置参数
-        this.params = request.getParameterMap();
-        LOGGER.info("===> i: {}", JsonUtil.toJson(params));
-        //执行操作
+
         Map<String, Object> result;
         try {
-            //生成上下文
+            Map<String, Object> params = request.getParameterMap();
+            LOGGER.info("===> i: {}");
+            //
             RequestContext cxt = new RequestContext(request, response);
-            Integer ubId = getParam("ub_id");
-            String accessToken = getParam("access_token");
-            if (ubId != null) {
-                cxt.setUbId(new Long(ubId));
-                cxt.setAccessToken(accessToken);
-            }
-
-            checkData(cxt, params);
-
-            Map<String, Object> data = execute(cxt, params);
+            SessionUserInfo userInfo = null;
+            //
+            checkData(userInfo, cxt, params);
+            //
+            Map<String, Object> data = execute(userInfo, cxt, params);
+            //
             result = Results.buildOk(data);
-            LOGGER.info("===> o: {}", JsonUtil.toJson(result));
+            LOGGER.info("===> o: {}");
         } catch (Exception ex) {
             throw ex;
         }
@@ -52,29 +44,21 @@ public abstract class BaseAction implements Action {
     }
 
     /**
-     * 取得参数
-     *
-     * @param paramName
-     * @return T
-     */
-    protected final <T> T getParam(String paramName) {
-        return (T) params.get(paramName);
-    }
-
-    /**
      * 验证参数
      *
+     * @param userInfo
      * @param cxt
      * @param params
      */
-    public abstract void checkData(RequestContext cxt, Map<String, Object> params);
+    public abstract void checkData(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> params);
 
     /**
      * 执行逻辑
      *
+     * @param userInfo
      * @param cxt
      * @param params
      * @return Map<String, Object>
      */
-    public abstract Map<String, Object> execute(RequestContext cxt, Map<String, Object> params);
+    public abstract Map<String, Object> execute(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> params);
 }
