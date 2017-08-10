@@ -8,14 +8,13 @@
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 >
 
-    <context:component-scan base-package="com.noriental.teacherweb.*">
-        <!-- 临时屏蔽掉latte_framework 里面的一些类 -->
-        <context:exclude-filter type="regex" expression="com.noriental.adminsvr.context.*"/>
-        <context:exclude-filter type="regex" expression="com.noriental.adminsvr.util.NfsUtil"/>
+    <context:component-scan base-package="com.company.project">
     </context:component-scan>
-    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+
+    <bean class="com.company.project.support.SpringContext"/>
+
     <dubbo:application name="demo-api"/>
 
-    <dubbo:registry protocol="dubbo" address="zookeeper://${server.zk.url}" file="${server.dubbo.registry.file}"/>
+    <!--<dubbo:registry protocol="dubbo" address="zookeeper://${server.zk.url}" file="${server.dubbo.registry.file}"/>-->
 
 </beans>
