@@ -30,9 +30,9 @@ public class ApiGuard extends OncePerRequestFilter {
         try {
             //Post提交
             String method = request.getMethod();
-            if (!"POST".equals(method.toUpperCase())) {
-                return;
-            }
+//            if (!"POST".equals(method.toUpperCase())) {
+//                return;
+//            }
             String uri = request.getRequestURI();
             //LOGGER.info("URI[{}]'s content type is [{}]", uri, request.getContentType());
 
