@@ -8,7 +8,6 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:spring-*.xml,
             /WEB-INF/spring/spring-*.xml
         </param-value>
     </context-param>
@@ -42,7 +41,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- =================== -->
-    <!--      Spring MVC     -->
+    <!--     Welcome File    -->
     <!-- =================== -->
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
