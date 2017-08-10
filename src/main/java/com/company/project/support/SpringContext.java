@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  *
  * @author wangzhj
  */
-@Component
 public class SpringContext implements ApplicationContextAware {
 
     private static ApplicationContext CONTEXT;
