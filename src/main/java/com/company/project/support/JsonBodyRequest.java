@@ -21,7 +21,7 @@ public class JsonBodyRequest extends HttpServletRequestWrapper {
      */
     private byte[] body = new byte[]{};
     /**
-     * 参数Map
+     * 参数
      */
     private Map<String, Object> param;
 
