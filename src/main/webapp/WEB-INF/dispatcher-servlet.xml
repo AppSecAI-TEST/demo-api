@@ -7,7 +7,7 @@
     <!-- =================== -->
     <!--      扫描Bean       -->
     <!-- =================== -->
-    <context:component-scan base-package="com.company.project.web">
+    <context:component-scan base-package="com.company.project.api">
     </context:component-scan>
     <!--<mvc:annotation-driven />-->
     <!-- =================== -->
@@ -45,4 +45,6 @@
             </list>
         </property>
     </bean>
+
+    <bean class="com.company.project.support.Uris"/>
 </beans>
