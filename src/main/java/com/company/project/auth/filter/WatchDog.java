@@ -61,7 +61,7 @@ public class WatchDog extends OncePerRequestFilter {
             //执行下个Filter
             filterChain.doFilter(request, response);
         } finally {
-            LOGGER.info("uri [{}] cost [{} ms]", uri, stopwatch.elapsed(TimeUnit.MILLISECONDS));
+            LOGGER.info("uri[{}]cost[{} ms]", uri, stopwatch.elapsed(TimeUnit.MILLISECONDS));
             //清理
             Request.remove();
             TrackKey.remove();
