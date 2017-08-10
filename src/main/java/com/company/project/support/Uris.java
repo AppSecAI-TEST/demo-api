@@ -19,7 +19,7 @@ import java.util.Set;
  *
  * @author wangzhj
  */
-public final class Uris implements ApplicationContextAware {
+public class Uris implements ApplicationContextAware {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Uris.class);
 

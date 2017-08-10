@@ -25,15 +25,15 @@ public abstract class BaseAction implements Action {
 
         Map<String, Object> result;
         try {
-            Map<String, Object> params = request.getParameterMap();
+            Map<String, Object> param = request.getParameterMap();
             LOGGER.info("===> i: {}");
             //
             RequestContext cxt = new RequestContext(request, response);
             SessionUserInfo userInfo = null;
             //
-            checkData(userInfo, cxt, params);
+            checkData(userInfo, cxt, param);
             //
-            Map<String, Object> data = execute(userInfo, cxt, params);
+            Map<String, Object> data = execute(userInfo, cxt, param);
             //
             result = Results.buildOk(data);
             LOGGER.info("===> o: {}");
@@ -48,17 +48,17 @@ public abstract class BaseAction implements Action {
      *
      * @param userInfo
      * @param cxt
-     * @param params
+     * @param param
      */
-    public abstract void checkData(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> params);
+    public abstract void checkData(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> param);
 
     /**
      * 执行逻辑
      *
      * @param userInfo
      * @param cxt
-     * @param params
+     * @param param
      * @return Map<String, Object>
      */
-    public abstract Map<String, Object> execute(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> params);
+    public abstract Map<String, Object> execute(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> param);
 }
