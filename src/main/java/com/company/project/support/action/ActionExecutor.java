@@ -1,7 +1,6 @@
 package com.company.project.support.action;
 
-import com.company.project.support.action.Action;
-import com.company.project.webapi.web.support.context.SpringContext;
+import com.company.project.support.SpringContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
