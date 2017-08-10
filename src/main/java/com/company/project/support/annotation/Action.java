@@ -1,8 +1,9 @@
-package com.company.project.support;
+package com.company.project.support.annotation;
 
 import org.springframework.core.annotation.AliasFor;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -11,16 +12,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Api注解
+ * Action注解
  *
  * @author wangzhj
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Controller
-@RequestMapping
-public @interface Api {
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@ResponseBody
+public @interface Action {
 
     @AliasFor("path")
     String[] value() default {};

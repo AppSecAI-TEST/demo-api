@@ -22,7 +22,6 @@ public abstract class BaseAction implements Action {
 
     @Override
     public final Map<String, Object> doExecute(HttpServletRequest request, HttpServletResponse response) {
-
         Map<String, Object> result;
         try {
             Map<String, Object> param = request.getParameterMap();
@@ -50,7 +49,8 @@ public abstract class BaseAction implements Action {
      * @param cxt
      * @param param
      */
-    public abstract void checkData(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> param);
+    public abstract void checkData(SessionUserInfo userInfo, RequestContext cxt,
+                                   Map<String, Object> param);
 
     /**
      * 执行逻辑
@@ -60,5 +60,6 @@ public abstract class BaseAction implements Action {
      * @param param
      * @return Map<String, Object>
      */
-    public abstract Map<String, Object> execute(SessionUserInfo userInfo, RequestContext cxt, Map<String, Object> param);
+    public abstract Map<String, Object> execute(SessionUserInfo userInfo, RequestContext cxt,
+                                                Map<String, Object> param);
 }
