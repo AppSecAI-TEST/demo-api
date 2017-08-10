@@ -55,13 +55,13 @@ public class WatchDog extends OncePerRequestFilter {
             //Uri
             if (!Uris.isLegal(uri)) {
                 response.sendError(404);
-                LOGGER.warn("URI[{}]非法！", uri);
+                LOGGER.warn("uri[{}]非法！", uri);
                 return;
             }
             //执行下个Filter
             filterChain.doFilter(request, response);
         } finally {
-            LOGGER.info("URI[{}] cost [{} ms]", uri, stopwatch.elapsed(TimeUnit.MILLISECONDS));
+            LOGGER.info("uri [{}] cost [{} ms]", uri, stopwatch.elapsed(TimeUnit.MILLISECONDS));
             //清理
             Request.remove();
             TrackKey.remove();

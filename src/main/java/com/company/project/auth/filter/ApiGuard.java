@@ -24,6 +24,7 @@ public class ApiGuard extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
+        LOGGER.info("SSS");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         try {

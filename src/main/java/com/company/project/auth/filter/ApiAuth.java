@@ -20,6 +20,7 @@ public class ApiAuth extends AdviceFilter {
 
     @Override
     protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
+        LOGGER.info("AAA");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         try {
 
