@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       xmlns:c="http://www.springframework.org/schema/c">
+
+    <!--<util:properties id="hostProp">-->
+    <!-- New version -->
+    <util:properties id="hostProp" location="classpath:zk.properties"/>
+
+    <!-- Config Profile -->
+    <bean id="configProfile" class="com.dangdang.config.service.zookeeper.ZookeeperConfigProfile">
+        <constructor-arg name="connectStr" value="#{hostProp['zk.address']}"/>
+        <constructor-arg name="rootNode" value="/xdfapp/teacher-web"/>
+        <constructor-arg name="version" value="#{hostProp['zk.version']}"/>
+    </bean>
+
+    <bean id="zookeeperSources" class="com.dangdang.config.service.support.spring.ConfigGroupSourceFactory"
+          factory-method="create">
+        <constructor-arg name="configGroups">
+            <list>
+                <!--<bean class="com.dangdang.config.service.zookeeper.ZookeeperConfigGroup" c:node="local"-->
+                <!--c:configProfile-ref="configProfile"/>-->
+                <bean class="com.dangdang.config.service.zookeeper.ZookeeperConfigGroup" c:node="change"
+                      c:configProfile-ref="configProfile"/>
+                <bean class="com.dangdang.config.service.zookeeper.ZookeeperConfigGroup" c:node="unchange"
+                      c:configProfile-ref="configProfile"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property value="1" name="order"/>
+        <property value="true" name="ignoreUnresolvablePlaceholders"/>
+        <property name="propertySources" ref="zookeeperSources"/>
+    </bean>
+
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="teacher-web"/>
+
+    <dubbo:registry protocol="dubbo" address="zookeeper://${server.zk.url}" file="${server.dubbo.registry.file}"/>
+    <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.noriental.teacherweb.*">
+        <!-- 临时屏蔽掉latte_framework 里面的一些类 -->
+        <context:exclude-filter type="regex" expression="com.noriental.adminsvr.context.*"/>
+        <context:exclude-filter type="regex" expression="com.noriental.adminsvr.util.NfsUtil"/>
+    </context:component-scan>
+
+    <bean class="com.noriental.global.dict.QiniuConstant">
+        <property name="isTest" value="${qiniu.test}"/>
+    </bean>
+
+    <bean id="qiNiuStorage" class="com.noriental.utils.qiniu.QiNiuStorage">
+        <property name="accessKey" value="${qiniu.accessKey}"/>
+        <property name="secretKey" value="${qiniu.secretKey}"/>
+    </bean>
+
+
+    <!--<bean class="com.noriental.teacherweb.classroominteraction.controller.ClassroomInteractionController">-->
+    <!--<property name="longconnectionAddr" value="${classroominteraction.longconnnection.url}"></property>-->
+    <!--<property name="longconnectionSaltToticket"-->
+    <!--value="${classroominteraction.longconnnection.salt.toticket}"></property>-->
+    <!--</bean>-->
+
+    <!--<bean class="com.noriental.teacherweb.quiz.controller.QuestionUploadController">-->
+    <!--<property name="remoteURL" value="${server.paper.url}"></property>-->
+    <!--<property name="remoteDocx2ImgURL" value="${server.paper.imgConvertPath}"></property>-->
+    <!--<property name="pollingTimeout" value="${server.paper.pollingTimeout}"></property>-->
+    <!--<property name="tmpDir" value="${server.storage.tmpdir}"></property>-->
+    <!--<property name="callbackPort" value="${server.paper.callback.port}"></property>-->
+
+    <!--</bean>-->
+
+    <bean id="socketConfig" class="com.noriental.teacherweb.config.ConfigSocket">
+        <property name="longconnectionAddr" value="${classroominteraction.longconnnection.url}"/>
+        <property name="longconnectionSaltToticket" value="${classroominteraction.longconnnection.salt.toticket}"/>
+    </bean>
+
+    <bean id="configUser" class="com.noriental.teacherweb.config.ConfigUser">
+        <property name="expireTime" value="${sms.expire_time}"/>
+        <property name="checkBindAlready" value="${sms.check_bind}"/>
+        <property name="bindTime" value="${bind.time}"/>
+        <property name="bindExcludeSchool" value="${bind.exclude.school}"/>
+        <property name="head_img_tmp_path" value="${head_img_tmp_path}"/>
+    </bean>
+
+    <bean id="configPush" class="com.noriental.teacherweb.config.ConfigPush">
+        <property name="key_rom" value="${push.key.rom}"/>
+        <property name="key_jiaxiao" value="${push.key.jiaxiao}"/>
+    </bean>
+
+
+    <bean id="configUrlResCount" class="com.noriental.teacherweb.config.ConfigUrlResCount">
+        <property name="url_res_chpt_knowledge_count" value="${url_res_chpt_knowledge_count}"/>
+        <property name="url_res_quizset_count" value="${url_res_quizset_count}"/>
+    </bean>
+
+    <bean id="configUrl" class="com.noriental.teacherweb.config.ConfigUrl">
+        <property name="url_search_word" value="${url_search_word}"/>
+    </bean>
+
+    <bean id="configClass" class="com.noriental.teacherweb.config.ConfigClass">
+        <property name="orgId" value="${class.create.org.id}"/>
+    </bean>
+
+    <bean id="configRegister" class="com.noriental.teacherweb.config.ConfigRegister">
+        <property name="register_org_str" value="${register.static.org.info}"/>
+    </bean>
+
+
+    <bean id="fastDfsPoolConfig" class="org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig">
+        <property name="maxTotal" value="10"/>
+        <property name="maxWaitMillis" value="30000"/>
+        <!--<property name="testOnBorrow" value="false" />&lt;!&ndash; 向调用者输出“链接”资源时，是否检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取。设为true，一个挂都不能用 &ndash;&gt;-->
+        <!--<property name="testOnReturn" value="true" />&lt;!&ndash; 向连接池“归还”链接时，是否检测“链接”对象的有效性。 &ndash;&gt;-->
+    </bean>
+
+
+    <bean id="fastDfsClient" class="com.noriental.teacherweb.utils.dfsclient.FastDfsService" init-method="init"
+          destroy-method="destory">
+        <property name="ip_list" value="${fastdfs.ip}"/>
+        <property name="port" value="${fastdfs.port_tracker}"/>
+        <property name="url_domain" value="${fastdfs.url_domain}"/>
+        <property name="poolConfig" ref="fastDfsPoolConfig"/>
+    </bean>
+
+</beans>
