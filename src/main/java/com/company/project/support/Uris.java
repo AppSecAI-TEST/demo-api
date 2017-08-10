@@ -30,10 +30,11 @@ public class Uris {
             Set<String> set = requestCond.getPatterns();
             LEGAL_URI_SET.addAll(set);
         }
-        LOGGER.info("========== 共[ {} ]个接口 ==========", LEGAL_URI_SET.size());
+        LOGGER.info("========== 共[{}]个接口 ==========", LEGAL_URI_SET.size());
         for (String uri : LEGAL_URI_SET) {
             LOGGER.info("[{}]", uri);
         }
+        LOGGER.info("=================================");
     }
 
     /**

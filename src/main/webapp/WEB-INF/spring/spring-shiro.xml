@@ -4,20 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- ==================== -->
     <!--        入口          -->
-    <!-- URL表达式说明
-     1、URL目录是基于HttpServletRequest.getContextPath()此目录设置
-     2、URL可使用通配符，**代表任意子目录
-     3、Shiro验证URL时，URL匹配成功便不再继续匹配查找。所以要注意配置文件中的URL顺序，尤其在使用通配符时。
-Shiro可以通过配置文件实现基于URL的授权验证。FilterChain定义格式：
-URL_Ant_Path_Expression = Path_Specific_Filter_Chain
-每个URL配置，表示匹配该URL的应用程序请求将由对应的过滤器进行验证。
-     Filter Chain定义说明
-     1、一个URL可以配置多个Filter，使用逗号分隔
-     2、当设置多个过滤器时，全部验证通过，才视为通过
-     3、部分过滤器可指定参数，如perms，roles
-    重要：这里的加载顺序是自上而下，所以看到我们/** 写到最后，因为匹配不中最后都让这个匹配中。后面我们会讲到采用配置文件加载怎么有序加载。
-    所以记住一点，权限为金字塔状，先精确匹配或是权限稍小在前面，权限大（模糊匹配）的在后面。
-    -->
     <!-- ==================== -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
