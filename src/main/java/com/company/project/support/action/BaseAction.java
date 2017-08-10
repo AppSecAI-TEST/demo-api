@@ -2,7 +2,7 @@ package com.company.project.support.action;
 
 import com.company.project.support.Results;
 import com.company.project.support.context.RequestContext;
-import com.company.project.support.session.SessionUserInfo;
+import com.company.project.support.context.SessionUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
