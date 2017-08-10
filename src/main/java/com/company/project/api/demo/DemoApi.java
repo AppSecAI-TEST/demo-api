@@ -16,9 +16,15 @@ import java.util.Map;
 @RequestMapping("/demo")
 public class DemoApi {
 
-    @RequestMapping("/demo")
+    @RequestMapping("/say_hi")
     @ResponseBody
-    public Map<String, Object> bind_bank_card(HttpServletRequest request, HttpServletResponse response) {
-        return ActionExecutor.execute(request, response, Action_demo.class);
+    public Map<String, Object> say_hi(HttpServletRequest request, HttpServletResponse response) {
+        return ActionExecutor.execute(request, response, Action_say_hi.class);
+    }
+
+    @RequestMapping("/say_bye")
+    @ResponseBody
+    public Map<String, Object> say_bye(HttpServletRequest request, HttpServletResponse response) {
+        return ActionExecutor.execute(request, response, Action_say_hi.class);
     }
 }
