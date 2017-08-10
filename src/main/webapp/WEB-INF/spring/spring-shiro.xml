@@ -67,7 +67,7 @@ URL_Ant_Path_Expression = Path_Specific_Filter_Chain
     <!-- ==================== -->
     <!--      Subject工厂     -->
     <!-- ==================== -->
-    <bean id="customSubjectFactory" class="com.company.project.webapi.auth.extend.CustomSubjectFactory"/>
+    <bean id="customSubjectFactory" class="com.company.project.auth.extend.CustomSubjectFactory"/>
     <!-- ==================== -->
     <!--       会话管理器      -->
     <!-- ==================== -->
@@ -83,7 +83,7 @@ URL_Ant_Path_Expression = Path_Specific_Filter_Chain
     <!-- ==================== -->
     <!--      过滤器定义       -->
     <!-- ==================== -->
-    <bean id="watchDog" class="com.company.project.webapi.auth.filter.WatchDog"/>
-    <bean id="apiGuard" class="com.company.project.webapi.auth.filter.ApiGuard"/>
-    <bean id="apiAuth" class="com.company.project.webapi.auth.filter.ApiAuth"/>
+    <bean id="watchDog" class="com.company.project.auth.filter.WatchDog"/>
+    <bean id="apiGuard" class="com.company.project.auth.filter.ApiGuard"/>
+    <bean id="apiAuth" class="com.company.project.auth.filter.ApiAuth"/>
 </beans>
