@@ -3,10 +3,8 @@ package com.company.project.support;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Map;
 
 /**
@@ -17,11 +15,11 @@ import java.util.Map;
 public class JsonBodyRequest extends HttpServletRequestWrapper {
 
     /**
-     * 请求体
+     * 请求实体
      */
     private byte[] body = new byte[]{};
     /**
-     * 参数
+     * 请求参数
      */
     private Map<String, Object> param;
 
