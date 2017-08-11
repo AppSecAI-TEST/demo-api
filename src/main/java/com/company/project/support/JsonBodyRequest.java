@@ -13,7 +13,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -62,7 +61,7 @@ public class JsonBodyRequest extends HttpServletRequestWrapper {
     }
 
     private String getBody(HttpServletRequest request) {
-        String body = "";
+        String body = null;
         try {
             InputStream stream = request.getInputStream();
             InputStreamReader reader = new InputStreamReader(stream, Charsets.UTF_8);
