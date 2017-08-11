@@ -38,5 +38,6 @@ public class ApiAuth extends AdviceFilter {
     @Override
     public void afterCompletion(ServletRequest servletRequest, ServletResponse servletResponse,
                                 Exception ex) throws Exception {
+        ex.printStackTrace();
     }
 }

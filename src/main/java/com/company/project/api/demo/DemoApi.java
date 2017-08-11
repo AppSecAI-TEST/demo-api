@@ -1,7 +1,7 @@
 package com.company.project.api.demo;
 
-import com.company.project.support.Action;
-import com.company.project.support.Api;
+import com.company.project.support.annotation.Action;
+import com.company.project.support.annotation.Api;
 import com.company.project.support.action.ActionExecutor;
 
 import javax.servlet.http.HttpServletRequest;

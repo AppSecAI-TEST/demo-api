@@ -1,5 +1,6 @@
 package com.company.project.auth.filter;
 
+import com.company.project.support.JsonBodyRequest;
 import org.apache.shiro.web.servlet.OncePerRequestFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +37,9 @@ public class ApiGuard extends OncePerRequestFilter {
             String uri = request.getRequestURI();
             //LOGGER.info("URI[{}]'s content type is [{}]", uri, request.getContentType());
 
+            JsonBodyRequest myRequest = new JsonBodyRequest(request);
             //继续执行
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(myRequest, response);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -22,6 +22,8 @@ public abstract class BaseAction implements Action {
 
     @Override
     public final Map<String, Object> doExecute(HttpServletRequest request, HttpServletResponse response) {
+
+        LOGGER.info("ParameterMap===>"+request.getParameterMap());
         Map<String, Object> result;
         try {
             Map<String, Object> param = request.getParameterMap();

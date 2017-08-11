@@ -1,10 +1,19 @@
 package com.company.project.support;
 
+import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -13,6 +22,8 @@ import java.util.Map;
  * @author wangzhj
  */
 public class JsonBodyRequest extends HttpServletRequestWrapper {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonBodyRequest.class);
 
     /**
      * 请求实体
@@ -26,17 +37,13 @@ public class JsonBodyRequest extends HttpServletRequestWrapper {
     public JsonBodyRequest(HttpServletRequest request) {
         super(request);
         //可重复读
-//        String bodyStr = HttpServlets.getBodyString(request);
-//        if(!Strings.isNullOrEmpty(bodyStr)){
-//            body = bodyStr.getBytes(Charset.forName("UTF-8"));
+        String myBody = getBody(request);
+        LOGGER.info(myBody);
+        if (!Strings.isNullOrEmpty(myBody)) {
+            body = myBody.getBytes();
 //            params = JsonUtil.fromJson(bodyStr);
-//        }
+        }
     }
-
-//    @Override
-//    public BufferedReader getReader() throws IOException {
-//        return new BufferedReader(new InputStreamReader(getInputStream()));
-//    }
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
@@ -52,5 +59,17 @@ public class JsonBodyRequest extends HttpServletRequestWrapper {
     @Override
     public Map<String, Object> getParameterMap() {
         return this.param;
+    }
+
+    private String getBody(HttpServletRequest request) {
+        String body = "";
+        try {
+            InputStream stream = request.getInputStream();
+            InputStreamReader reader = new InputStreamReader(stream, Charsets.UTF_8);
+            body = CharStreams.toString(reader);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return body;
     }
 }
