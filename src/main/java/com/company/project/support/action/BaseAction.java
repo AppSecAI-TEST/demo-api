@@ -23,19 +23,20 @@ public abstract class BaseAction implements Action {
     @Override
     public final Map<String, Object> doExecute(HttpServletRequest request, HttpServletResponse response) {
 
-        LOGGER.info("ParameterMap===>"+request.getParameterMap());
+        LOGGER.info("ParameterMap===>" + request.getParameterMap());
         Map<String, Object> result;
         try {
+            //参数
             Map<String, Object> param = request.getParameterMap();
             LOGGER.info("===> i: {}");
-            //
+            //包装
             RequestContext cxt = new RequestContext(request, response);
             SessionUserInfo userInfo = null;
-            //
+            //验证
             checkData(userInfo, cxt, param);
-            //
+            //执行
             Map<String, Object> data = execute(userInfo, cxt, param);
-            //
+            //结果
             result = Results.buildOk(data);
             LOGGER.info("===> o: {}");
         } catch (Exception ex) {
