@@ -46,11 +46,11 @@ public class JsonBodyRequest extends HttpServletRequestWrapper {
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        final ByteArrayInputStream baIs = new ByteArrayInputStream(body);
+        final ByteArrayInputStream stream = new ByteArrayInputStream(body);
         return new ServletInputStream() {
             @Override
             public int read() throws IOException {
-                return baIs.read();
+                return stream.read();
             }
         };
     }
