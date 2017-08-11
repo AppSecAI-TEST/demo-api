@@ -32,12 +32,13 @@ public class ApiAuth extends AdviceFilter {
 
     @Override
     protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
-        LOGGER.info("postHandle......");
+        LOGGER.info("===>postHandle");
     }
 
     @Override
     public void afterCompletion(ServletRequest servletRequest, ServletResponse servletResponse,
                                 Exception ex) throws Exception {
+        LOGGER.info("===>afterCompletion");
 //        ex.printStackTrace();
     }
 }
